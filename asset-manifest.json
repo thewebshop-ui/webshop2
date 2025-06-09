@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/webshop/static/css/main.c14068c8.chunk.css",
-    "main.js": "/webshop/static/js/main.9def54d8.chunk.js",
-    "main.js.map": "/webshop/static/js/main.9def54d8.chunk.js.map",
-    "runtime-main.js": "/webshop/static/js/runtime-main.7360cb70.js",
-    "runtime-main.js.map": "/webshop/static/js/runtime-main.7360cb70.js.map",
-    "static/js/2.357ea4c0.chunk.js": "/webshop/static/js/2.357ea4c0.chunk.js",
-    "static/js/2.357ea4c0.chunk.js.map": "/webshop/static/js/2.357ea4c0.chunk.js.map",
-    "index.html": "/webshop/index.html",
-    "precache-manifest.05f46c16f0d717cee827e2b5eda7b8e7.js": "/webshop/precache-manifest.05f46c16f0d717cee827e2b5eda7b8e7.js",
-    "service-worker.js": "/webshop/service-worker.js",
-    "static/css/main.c14068c8.chunk.css.map": "/webshop/static/css/main.c14068c8.chunk.css.map",
-    "static/js/2.357ea4c0.chunk.js.LICENSE.txt": "/webshop/static/js/2.357ea4c0.chunk.js.LICENSE.txt",
-    "static/media/Ernstings.png": "/webshop/static/media/Ernstings.cf97d009.png",
-    "static/media/icon.svg": "/webshop/static/media/icon.28a304ac.svg"
+    "main.css": "/webshop2/static/css/main.c14068c8.chunk.css",
+    "main.js": "/webshop2/static/js/main.e445d203.chunk.js",
+    "main.js.map": "/webshop2/static/js/main.e445d203.chunk.js.map",
+    "runtime-main.js": "/webshop2/static/js/runtime-main.6b67b4f5.js",
+    "runtime-main.js.map": "/webshop2/static/js/runtime-main.6b67b4f5.js.map",
+    "static/js/2.357ea4c0.chunk.js": "/webshop2/static/js/2.357ea4c0.chunk.js",
+    "static/js/2.357ea4c0.chunk.js.map": "/webshop2/static/js/2.357ea4c0.chunk.js.map",
+    "index.html": "/webshop2/index.html",
+    "precache-manifest.e65552b1ae6abfc24989c635aae1f3bb.js": "/webshop2/precache-manifest.e65552b1ae6abfc24989c635aae1f3bb.js",
+    "service-worker.js": "/webshop2/service-worker.js",
+    "static/css/main.c14068c8.chunk.css.map": "/webshop2/static/css/main.c14068c8.chunk.css.map",
+    "static/js/2.357ea4c0.chunk.js.LICENSE.txt": "/webshop2/static/js/2.357ea4c0.chunk.js.LICENSE.txt",
+    "static/media/Ernstings.png": "/webshop2/static/media/Ernstings.cf97d009.png",
+    "static/media/icon.svg": "/webshop2/static/media/icon.28a304ac.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.7360cb70.js",
+    "static/js/runtime-main.6b67b4f5.js",
     "static/js/2.357ea4c0.chunk.js",
     "static/css/main.c14068c8.chunk.css",
-    "static/js/main.9def54d8.chunk.js"
+    "static/js/main.e445d203.chunk.js"
   ]
 }
