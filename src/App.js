@@ -14,19 +14,18 @@ window.results = {
   subjectGroup: Math.random() < 0.5 ? "test" : "control",
   startTime: new Date(),
   clicksProductinformation: 0,
-  productInfoDwellTime: 0  // 👈 NEU
+  productInfoDwellTime: 0
 };
-
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [cart, setCart] = useState({ line_items: [], total_items: 0, subtotal: { formatted: 0 } });
 
   const [filterState, setFilterState] = useState({
-    gender: '',
-    size: '',
-    categories: []
+    targetGroups: [],
+    productTypes: []
   });
 
   useEffect(() => {
@@ -34,19 +33,19 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (products.length === 0) return;
+    if (allProducts.length === 0) return;
 
     const savedCart = Cookies.get('cart');
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart);
-        const syncedCart = updateCartWithLatestProducts(parsedCart, products);
+        const syncedCart = updateCartWithLatestProducts(parsedCart, allProducts);
         setCart(updateCartTotal(syncedCart));
       } catch (e) {
         console.error('Invalid cart cookie', e);
       }
     }
-  }, [products]);
+  }, [allProducts]);
 
   useEffect(() => {
     Cookies.set('cart', JSON.stringify(cart), { expires: 7 });
@@ -54,13 +53,13 @@ const App = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://eu-central-1.aws.data.mongodb-api.com/app/application-0-yfsqbzt/endpoint/getProducts");
-  
-      const text = await response.text(); // 👈 Use this for debugging
+      const response = await fetch("https://webshop-api-cyan.vercel.app/api/products");
+      const text = await response.text();
       console.log("🧾 Raw response:", text);
-  
-      const data = JSON.parse(text); // try parsing manually
+
+      const data = JSON.parse(text);
       setProducts(data.products);
+      setAllProducts(data.products);
     } catch (error) {
       console.error("❌ Error fetching products:", error);
     }
@@ -83,30 +82,24 @@ const App = () => {
     return { ...savedCart, line_items: updatedItems };
   };
 
-  const filterProducts = ({ gender = '', size = '', categories = [] }) => {
-    setFilterState({ gender, size, categories });
+  const filterProducts = ({ targetGroups = [], productTypes = [] }) => {
+    setFilterState({ targetGroups, productTypes });
 
-    const filtered = products.filter((product) => {
+    const filtered = allProducts.filter((product) => {
       const productCategories = product.categories || [];
 
-      const matchesGender = gender ? productCategories.includes(gender) : true;
+      const matchesTargetGroup =
+        targetGroups.length === 0 ||
+        targetGroups.some(group => productCategories.includes(group));
 
-      const matchesCategory =
-        categories.length > 0
-          ? categories.some(cat => productCategories.includes(cat))
-          : true;
+      const matchesProductType =
+        productTypes.length === 0 ||
+        productTypes.some(type => productCategories.includes(type));
 
-      const matchesSize = size
-        ? Object.values(product.attributes || {}).some((section) =>
-            Object.entries(section).some(([key, value]) =>
-              key.toLowerCase().includes('größe') && value === size
-            )
-          )
-        : true;
-
-      return matchesGender && matchesCategory && matchesSize;
+      return matchesTargetGroup && matchesProductType;
     });
 
+    console.log("Filtered products:", filtered, "with filters:", { targetGroups, productTypes });
     setProducts(filtered);
   };
 
@@ -120,7 +113,7 @@ const App = () => {
           item.product_id === productId ? { ...item, quantity: item.quantity + quantity } : item
         );
       } else {
-        const product = products.find((p) => p.id === productId);
+        const product = allProducts.find((p) => p.id === productId);
         if (!product) return prevCart;
 
         const newItem = {
@@ -190,7 +183,7 @@ const App = () => {
           <CssBaseline />
           <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
           <Switch>
-            <Route exact path="/webshop">
+            <Route exact path="/webshop2">
               <Filters filterProducts={filterProducts} keys={filterState} />
               <Products products={products} onAddToCart={handleAddToCart} />
             </Route>

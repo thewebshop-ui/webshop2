@@ -94,7 +94,7 @@ const Product = ({ product, onAddToCart }) => {
           title={product.name}
         />
 
-        {isTestGroup && product.isSustainable && (
+        {product.isSustainable && (
           <div style={{
             position: 'absolute',
             top: 10,
@@ -120,15 +120,18 @@ const Product = ({ product, onAddToCart }) => {
         <Typography gutterBottom variant="h5" component="h2">
           {product.name}
         </Typography>
-        <Button
-          className={classes.infoButton}
-          startIcon={<InfoIcon />}
-          onClick={handleDrawerOpen}
-          variant="outlined"
-          color="primary"
-        >
-          Produktinformationen
-        </Button>
+
+        {isTestGroup && (
+          <Button
+            className={classes.infoButton}
+            startIcon={<InfoIcon />}
+            onClick={handleDrawerOpen}
+            variant="outlined"
+            color="primary"
+          >
+            Produktinformationen
+          </Button>
+        )}
       </CardContent>
 
       <CardActions className={classes.cardActions}>
@@ -144,9 +147,11 @@ const Product = ({ product, onAddToCart }) => {
         </IconButton>
       </CardActions>
 
-      <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
-        {renderDrawerContent()}
-      </Drawer>
+      {isTestGroup && (
+        <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
+          {renderDrawerContent()}
+        </Drawer>
+      )}
     </Card>
   );
 };

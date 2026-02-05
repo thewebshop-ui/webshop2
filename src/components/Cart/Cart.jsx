@@ -20,9 +20,9 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
     <div>
       <Typography variant="subtitle1">
         Es befindet sich zurzeit nichts im Warenkorb,
-        <Link className={classes.link} to="/webshop"> füge etwas hinzu</Link>!
+        <Link className={classes.link} to="/webshop2"> füge etwas hinzu</Link>!
       </Typography>
-      <Button className={classes.checkoutButtonEmptyCart} size="large" variant="contained" color="primary" component={Link} to="/webshop">
+      <Button className={classes.checkoutButtonEmptyCart} size="large" variant="contained" color="primary" component={Link} to="/webshop2">
         Zurück
       </Button>
     </div>
@@ -69,11 +69,11 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
       cartCategories: Array.from(new Set(products.flatMap(p => p.categories))),
       cartSizes: Array.from(new Set(products.flatMap(p => p.categories))), // Replace with size logic if needed
       clicks: window.results.clicksProductinformation || 0,
-      dwellTime: window.results.sidebarDwellTime || 0
+      dwellTime: window.results.productInfoDwellTime || 0
     };
   
     try {
-      const response = await fetch('https://eu-central-1.aws.data.mongodb-api.com/app/application-0-yfsqbzt/endpoint/postSurvey', {
+      const response = await fetch('https://webshop-api-cyan.vercel.app/api/results', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -144,7 +144,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
       <div className={classes.cardDetails}>
         <Typography variant="h4">Summe: {cart.subtotal.formatted.toFixed(2)}€</Typography>
         <div>
-          <Button className={classes.emptyButton} size="large" variant="contained" color="primary" component={Link} to="/webshop">
+          <Button className={classes.emptyButton} size="large" variant="contained" color="primary" component={Link} to="/webshop2">
             Zurück
           </Button>
           <Button className={classes.emptyButton} size="large" variant="contained" color="primary" onClick={onEmptyCart}>
