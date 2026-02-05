@@ -46,7 +46,6 @@ const PrimarySearchAppBar = ({totalItems}) => {
 //      <FormDialog open={open} setOpen={setOpen}/>
     return (
         <>
-            <FormDialog open={open} setOpen={setOpen}/>
             <AppBar position="fixed" className={classes.appBar} color="inherit">
                 <Toolbar>
                     <Typography component={Link} to="/webshop2" variant="h6" className={classes.title} color="inherit">
