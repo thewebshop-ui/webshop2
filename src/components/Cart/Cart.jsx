@@ -73,7 +73,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
     };
   
     try {
-      const response = await fetch('https://webshop-api-cyan.vercel.app/api/results', {
+      const response = await fetch('https://webshop-api-gray.vercel.app/api/results', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
