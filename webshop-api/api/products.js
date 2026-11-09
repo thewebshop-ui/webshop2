@@ -4,6 +4,15 @@ const uri = process.env.MONGODB_URI;
 let client;
 
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "https://thewebshop-ui.github.io");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Vary", "Origin");
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
   if (!client) {
     client = new MongoClient(uri);
     await client.connect();
